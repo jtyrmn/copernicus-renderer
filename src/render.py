@@ -5,7 +5,9 @@ from OpenGL.GLUT import *
 import pygame
 from pygame.locals import *
 
-from Vector_3 import *
+from vector3 import *
+
+import sys
 
 sphere = gluNewQuadric()
 gluQuadricDrawStyle(sphere, GLU_LINE)
@@ -30,7 +32,9 @@ def draw_circle(camera, radius, position):
     # note that all of the matrix transformations are performed in reverse order due to PyOpenGl's matrix stack mechanic
     glPushMatrix()
     # convert orthogonal scene to perspective
-    gluPerspective(camera.fov, camera.width/camera.height, 0.1, 50.0)
+    # setting far end of the view frustrum to sys.float_info.max because this camera will need to 
+    # render at extreme distances
+    gluPerspective(camera.fov, camera.width/camera.height, 0.1, sys.float_info.max)
     
     # camera's rotation
     # glRotatef(camera.rotation.x * camera.sensitivity, 1, 0, 0)

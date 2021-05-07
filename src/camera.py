@@ -2,7 +2,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from Vector_3 import *
+from vector3 import *
 
 import pygame
 from pygame.locals import *
@@ -136,25 +136,25 @@ class Camera:
             
         # above 2 blocks of code dealt with variables, now to perform actions with these variables
         if self.key_a:
-            self.move(Vector_3(-1,0,0))
+            self.move(Vector3(-1,0,0))
         if self.key_d:
-            self.move(Vector_3(1,0,0))
+            self.move(Vector3(1,0,0))
         if self.key_w:
-            self.move(Vector_3(0,0,-1))
+            self.move(Vector3(0,0,-1))
         if self.key_s:
-            self.move(Vector_3(0,0,1))
+            self.move(Vector3(0,0,1))
         if self.key_space:
-            self.move(Vector_3(0,-1,0))
+            self.move(Vector3(0,-1,0))
         if self.key_shift:
-            self.move(Vector_3(0,1,0))
+            self.move(Vector3(0,1,0))
         if self.key_left:
-            self.rotate(Vector_3(0,-1,0))
+            self.rotate(Vector3(0,-1,0))
         if self.key_right:
-            self.rotate(Vector_3(0,1,0))
+            self.rotate(Vector3(0,1,0))
         if self.key_up:
-            self.rotate(Vector_3(-1,0,0))
+            self.rotate(Vector3(-1,0,0))
         if self.key_down:
-            self.rotate(Vector_3(1,0,0))
+            self.rotate(Vector3(1,0,0))
         if self.key_i:
             self.fov += 0.01
         if self.key_o:

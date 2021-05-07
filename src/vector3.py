@@ -3,9 +3,9 @@ from math import sin, cos, radians
 
 import numpy as np
 
-# Vector_3 is a simple 3-dimensional vector container for repesenting positions and rotations
+# vector3 is a simple 3-dimensional vector container for repesenting positions and rotations
 
-class Vector_3:
+class Vector3:
     def __init__(self, x, y, z):
         self.x = x
         self.y = y
@@ -16,22 +16,22 @@ class Vector_3:
     
     #basic operations
     def __add__(self, vector):
-        return Vector_3(self.x + vector.x, self.y + vector.y, self.z + vector.z)
+        return Vector3(self.x + vector.x, self.y + vector.y, self.z + vector.z)
     def __sub__(self, vector):
-        return Vector_3(self.x - vector.x, self.y - vector.y, self.z - vector.z)
+        return Vector3(self.x - vector.x, self.y - vector.y, self.z - vector.z)
     def __truediv__(self, divisor):
-        return Vector_3(self.x / divisor, self.y / divisor, self.z / divisor)
+        return Vector3(self.x / divisor, self.y / divisor, self.z / divisor)
     def __mul__(self, factor):
-        return Vector_3(self.x * factor, self.y * factor, self.z * factor)
+        return Vector3(self.x * factor, self.y * factor, self.z * factor)
     def __mod__(self, divisor):
-        return Vector_3(self.x % divisor, self.y % divisor, self.z % divisor)
+        return Vector3(self.x % divisor, self.y % divisor, self.z % divisor)
 
     #returns magnitude of vector
     def length(self):
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
     
     # rotate() returns this vector rotated around (0, 0, 0) in 3d space.
-    # The one parameter is a Vector_3 containing rotation around x, y, z, axis (in radians) 
+    # The one parameter is a vector3 containing rotation around x, y, z, axis (in radians) 
     def rotate(self, rotation):
 
         #define x,y,z rotational matrices
@@ -63,12 +63,12 @@ class Vector_3:
         rotated_vector = np.matmul(rotation_z_matrix,rotated_vector)
 
         #convert back
-        return Vector_3(rotated_vector[0][0], rotated_vector[1][0], rotated_vector[2][0])
+        return Vector3(rotated_vector[0][0], rotated_vector[1][0], rotated_vector[2][0])
     
-    # for if a Vector_3 stores rotations in degrees
+    # for if a vector3 stores rotations in degrees
     # else-wise, don't use!
     def to_radians(self):
-        return Vector_3(radians(self.x), radians(self.y), radians(self.z))
+        return Vector3(radians(self.x), radians(self.y), radians(self.z))
 
     #returns physical distance between vector1, vector2
     @staticmethod
