@@ -28,9 +28,11 @@ def at_end_of_loop():
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
 
-def draw_circle(camera, radius, position):
+def draw_sphere(camera, radius, position):
     # note that all of the matrix transformations are performed in reverse order due to PyOpenGl's matrix stack mechanic
     glPushMatrix()
+
+    # rotate the sphere
     # convert orthogonal scene to perspective
     # setting far end of the view frustrum to sys.float_info.max because this camera will need to 
     # render at extreme distances

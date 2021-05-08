@@ -7,6 +7,7 @@ from camera import Camera
 from celestial_bodies.celestial_body import Celestial_Body
 from celestial_bodies.trajectories.stationary import Stationary
 from celestial_bodies.trajectories.circular import Circular
+# TODO make these imports cleaner ^^^
 
 from pygame.time import get_ticks
 
@@ -44,7 +45,7 @@ def main():
         Circular(
             planet,
             1,
-            1000,
+            2000,
             0
         ),
         0.15,
@@ -58,7 +59,7 @@ def main():
         
         # render everything here
         #render.draw_circle(camera, 1, Vector3(0, 0, 0))
-        time = get_ticks()
+        time = get_ticks() * 10
         sun.render(camera, time)
         planet.render(camera, time)
         moon.render(camera, time)

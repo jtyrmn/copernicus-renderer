@@ -15,4 +15,4 @@ class Celestial_Body(abc.ABC):
     
     # render this object at a specific time
     def render(self, camera, time):
-        render.draw_circle(camera, self.radius, self.position_at(time))
+        render.draw_sphere(camera, self.radius, self.position_at(time))
