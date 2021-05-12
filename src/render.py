@@ -64,13 +64,11 @@ def draw_sphere(camera, radius, position, detail, color):
 
     glPopMatrix()
 
-# draw_vector can be used to draw lines. place a Vector3 vector at origin (another Vector3) and draw 
-# it. A line is drawn from origin to origin+vector. 
+# draw_vector can be used to draw lines in 3d space from origin to destination (both Vector3)
 # color is a tuple
-def draw_vector(camera, origin, vector, color = (255,255,255), line_width = 1):
+def draw_line(camera, origin, destination, color = (255,255,255), line_width = 1):
     point_a = (origin.x, origin.y, origin.z)
-    offset = origin + vector
-    point_b = (offset.x, offset.y, offset.z)
+    point_b = (destination.x, destination.y, destination.z)
 
     glColor3fv(color)
     glLineWidth(line_width)

@@ -2,7 +2,7 @@ import abc
 
 import render
 from vector3 import *
-from copy import deepcopy
+from copy import copy
 
 # This is the master class we will use to represent any planet, sun, etc.
 # trajectory is a Trajectory subclass' object
@@ -25,9 +25,4 @@ class Celestial_Body(abc.ABC):
     
     # render the trajectory of this body during time interval [time_begin, time_final] at step intervals of time_step
     def render_trajectory(self, camera, time_begin, time_final, time_step):
-        previous_point = self.position_at(time_begin)
-        for current_time in range(time_begin + time_step, time_final, time_step):
-            current_point = previous_point + self.position_at(current_time)
-            # definetly a more efficient way to draw entire trajectory, which I will do when 
-            # creating the planetary system data structure container class thingy
-            render.draw_vector(camera, previous_point, current_point, (200,200,0), 1)
+        self.trajectory.render(camera, time_begin, time_final, time_step)

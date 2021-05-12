@@ -13,7 +13,7 @@ from pygame.locals import *
 # width and height means screen size
 # speed defines movement speed and sensitivity defines rotation speed
 class Camera:
-    def __init__(self, position, rotation, width, height, fov, speed = 1, sensitivity = 1):
+    def __init__(self, position, rotation, width, height, fov, speed = 1, sensitivity = 1, current_time = 0):
         self.position = position
         self.rotation = rotation
         self.width = width
@@ -21,6 +21,10 @@ class Camera:
         self.fov = fov
         self.speed = speed
         self.sensitivity = sensitivity
+        # in order to have a consistent speed/sensitivity with an inconsistant frame rate, we need to 
+        # keep track of the time. current_time is the current time in miliseconds.
+        self.current_time = current_time
+        self.delta_time = 1
 
         # variables to keep track of movement/etc.
         # pygame.key.get_pressed() and event.key == w,a,s,d,... had irregular
@@ -44,7 +48,7 @@ class Camera:
     # this function translates the camera's position *relative to it's rotation* by the position parameter
     # parameter is a Vector_3 that defines the direction to move to 
     def move(self, position):
-        rotated_offset = position.rotate(self.rotation.to_radians()) * self.speed
+        rotated_offset = position.rotate(self.rotation.to_radians()) * self.speed * self.delta_time
         #self.position += rotated_offset
 
         # normally I would just do self.position += rotated_offset but since the x rotation (pitch) is negative when rotating upwards, the y
@@ -55,16 +59,20 @@ class Camera:
     
     # change rotation
     def rotate(self, rotation):
-        self.rotation += rotation * self.sensitivity * self.fov/45
+        self.rotation += rotation * self.sensitivity * self.delta_time * self.fov/45
     
-    # position translation without respect to camera's rotation
+    # position translation without respect to camera's rotation or speed
     def absolute_move(self, position):
         self.position += position
     
     def __str__(self):
         return f'camera @ {self.position} facing {self.rotation % 360} w/ fov {self.fov}'
-    
-    
+
+    # call somewhere at end of main loop. time is the current time in miliseconds. Used to re-calculate delta_time every frame
+    def at_end_of_loop(self, time):
+        self.delta_time = time - self.current_time
+        self.current_time = time
+        
     # handle input. *Must* be called once per main loop
     # deals with pygame events
     def handle_input(self):

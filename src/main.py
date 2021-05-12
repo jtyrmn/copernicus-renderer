@@ -14,13 +14,13 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
-from pygame.time import get_ticks
+import pygame
 
 WIDTH, HEIGHT = 1000, 800
 
 def main():
     # camera object
-    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.005, 0.05)
+    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.01, 0.1)
     # create window
     screen = render.renderer_init(WIDTH, HEIGHT)
 
@@ -42,7 +42,7 @@ def main():
             0
         ),
         0.5,
-        (0,0,255)
+        (0,200,255)
     )
 
     # create moon
@@ -50,7 +50,7 @@ def main():
         Circular(
             planet,
             1,
-            2000,
+            1500,
             0
         ),
         0.15,
@@ -78,17 +78,19 @@ def main():
         
         # render everything here
         #render.draw_circle(camera, 1, Vector3(0, 0, 0))
-        time = get_ticks()
+        time = pygame.time.get_ticks()
         sun.render(camera, time)
         planet.render(camera, time)
         moon.render(camera, time)
         pluto.render(camera, time)
 
         #testing trajectory render
-        planet.render_trajectory(camera, time - 3000, time +  2000, 500)
+        planet.render_trajectory(camera, time - 1000, time + 1000, 100)
+        moon.render_trajectory(camera, time - 1000, time + 1000, 75)
         #print(camera)
 
         # swap buffers to show what's rendered
         render.at_end_of_loop()
+        camera.at_end_of_loop(time)
 
 main()

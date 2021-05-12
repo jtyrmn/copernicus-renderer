@@ -74,6 +74,10 @@ class Vector3:
     def to_radians(self):
         return Vector3(radians(self.x), radians(self.y), radians(self.z))
 
+    # many opengl functions require vectors to be passed as 3-element tuples so use this function
+    def to_tuple(self):
+        return (self.x, self.y, self.z)
+
     #returns physical distance between vector1, vector2
     @staticmethod
     def distance(vector1, vector2):
