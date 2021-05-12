@@ -41,11 +41,6 @@ class Camera:
         self.key_i = False
         self.key_o = False
     
-    # def set_position(self, position):
-    #     self.position = position
-    # def set_rotation(self, rotation):
-    #     self.rotation = rotation
-    
     # this function translates the camera's position *relative to it's rotation* by the position parameter
     # parameter is a Vector_3 that defines the direction to move to 
     def move(self, position):
@@ -60,14 +55,14 @@ class Camera:
     
     # change rotation
     def rotate(self, rotation):
-        self.rotation += rotation * self.sensitivity
+        self.rotation += rotation * self.sensitivity * self.fov/45
     
     # position translation without respect to camera's rotation
     def absolute_move(self, position):
         self.position += position
     
     def __str__(self):
-        return f'camera @ {self.position} facing {self.rotation % 360}'
+        return f'camera @ {self.position} facing {self.rotation % 360} w/ fov {self.fov}'
     
     
     # handle input. *Must* be called once per main loop
@@ -105,7 +100,7 @@ class Camera:
                 if event.key == pygame.K_o:
                     self.key_o = True
             
-            #TODO find a better way to do this
+            #TODO maybe find a better way to do this
 
             # key released
             if event.type == pygame.KEYUP:
@@ -156,71 +151,9 @@ class Camera:
         if self.key_down:
             self.rotate(Vector3(1,0,0))
         if self.key_i:
-            self.fov += 0.01
+            self.fov += 0.1
         if self.key_o:
-            self.fov -= 0.01
-
-            # elif event.type == pygame.KEYDOWN:
-            #     # position
-            #     if event.key == pygame.K_a:
-            #         self.move(Vector_3(-1, 0, 0))
-            #     if event.key == pygame.K_d:
-            #         self.move(Vector_3(1, 0, 0))
-            #     if event.key == pygame.K_w:
-            #         self.move(Vector_3(0, 0, -1))
-            #     if event.key == pygame.K_s:
-            #         self.move(Vector_3(0, 0, 1))
-            #     if event.key == pygame.K_SPACE:
-            #         self.move(Vector_3(0, -1, 0))
-            #     if event.key == pygame.K_LSHIFT:
-            #         self.move(Vector_3(0, 1, 0))
-
-            #     # rotation
-            #     if event.key == pygame.K_LEFT:
-            #         self.rotate(Vector_3(0, -1, 0))
-            #     if event.key == pygame.K_RIGHT:
-            #         self.rotate(Vector_3(0, 1, 0))
-            #     if event.key == pygame.K_UP:
-            #         self.rotate(Vector_3(-1, 0, 0))
-            #     if event.key == pygame.K_DOWN:
-            #         self.rotate(Vector_3(1, 0, 0))
-                
-            #     # zoom
-            #     if event.key == pygame.K_i:
-            #         self.fov += 1
-            #     if event.key == pygame.K_o:
-            #         self.fov -= 1
-                
-
-            # # position
-            # keys = pygame.key.get_pressed()
-            # if keys[pygame.K_a]:
-            #     self.move(Vector_3(-1,0,0))
-            # if keys[pygame.K_d]:
-            #     self.move(Vector_3(1,0,0))
-            # if keys[pygame.K_w]:
-            #     self.move(Vector_3(0,0,-1))
-            # if keys[pygame.K_s]:
-            #     self.move(Vector_3(0,0,1))
-            # if keys[pygame.K_SPACE]:
-            #     self.move(Vector_3(0,-1,0))
-            # if keys[pygame.K_LSHIFT]:
-            #     self.move(Vector_3(0,1,0))
-            
-            # # rotation
-            # if keys[pygame.K_LEFT]:
-            #     self.rotate(Vector_3(0,-1,0))
-            # if keys[pygame.K_RIGHT]:
-            #     self.rotate(Vector_3(0,1,0))
-            # if keys[pygame.K_UP]:
-            #     self.rotate(Vector_3(-1,0,0))
-            # if keys[pygame.K_DOWN]:
-            #     self.rotate(Vector_3(1,0,0))
-
-            # # zooming
-            # if keys[pygame.K_i]:
-            #     print("zoom in")
-            #     self.fov -= 1.0
-            # if keys[pygame.K_o]:
-            #     self.fov += 1.0
-            #     print("zoom out")
+            self.fov -= 0.1
+        
+        # ensure pov isn't too small or big
+        self.fov = max(min(self.fov, 100), 1)

@@ -65,6 +65,10 @@ class Vector3:
         #convert back
         return Vector3(rotated_vector[0][0], rotated_vector[1][0], rotated_vector[2][0])
     
+    # return a vector of length 1
+    def normalize(self):
+        return self/self.length()
+    
     # for if a vector3 stores rotations in degrees
     # else-wise, don't use!
     def to_radians(self):
