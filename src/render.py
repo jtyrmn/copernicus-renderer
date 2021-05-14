@@ -12,7 +12,7 @@ from vector3 import *
 import sys
 
 sphere = gluNewQuadric()
-gluQuadricDrawStyle(sphere, GLU_LINE)
+#gluQuadricDrawStyle(sphere, GLU_LINE) #for wire-frame rendering
 
 pygame.font.init()
 font = pygame.font.Font(pygame.font.get_default_font(), 36)
@@ -22,7 +22,7 @@ def renderer_init(width, height):
     # pygame initialization
     pygame.init()
     window = pygame.display.set_mode((width, height), DOUBLEBUF|OPENGL)
-    pygame.display.set_caption("SPAAAAAAAAAAAAAAAAAAAAAACE")
+    pygame.display.set_caption("Copernicus Renderer")
     pygame.key.set_repeat(1, 10)    # allows buttons to be held
     return window
 
@@ -35,7 +35,7 @@ def at_end_of_loop():
 
 # see render.detail_level() for info on parameter detail
 def draw_sphere(camera, radius, position, detail, color):
-    # note that all of the matrix transformations are performed in reverse order due to PyOpenGl's matrix stack mechanic
+    # note that all of the matrix transformations are performed in reverse order due to PyOpenGl's matrix stack
     glPushMatrix()
     # color
     glColor3fv(color)
@@ -66,7 +66,7 @@ def draw_sphere(camera, radius, position, detail, color):
 
 # draw_vector can be used to draw lines in 3d space from origin to destination (both Vector3)
 # color is a tuple
-def draw_line(camera, origin, destination, color = (255,255,255), line_width = 1):
+def draw_line(camera, origin, destination, color = (1,1,1), line_width = 1):
     point_a = (origin.x, origin.y, origin.z)
     point_b = (destination.x, destination.y, destination.z)
 
@@ -99,10 +99,7 @@ def draw_line(camera, origin, destination, color = (255,255,255), line_width = 1
 
 # this function is for determining the number of stacks, slices of a sphere, which should decrease as the 
 # distance from the camera increases. Parameter distance should implement Vector3 .length() or .distance() function
-# initial_level is the detail at 0 distance
-# distance and camera fov should ideally be positive
-# stretch represents the horizontal stretch of the returned function. In other words, the greater the stretch, the 
-# less detail is removed as distance is increased
-def detail_level(initial_level, stretch, distance):
+# max is the level at distance=0 and min is what the function approaches as distance moves towards infinity
+def detail_level(max, min, distance):
     # detail level is inversely proportional to the square root of the distance
-    return 0.25*initial_level/math.sqrt(distance/stretch + 1) + 4
+    return (max-min)/math.sqrt(distance + 1) + min

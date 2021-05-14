@@ -19,7 +19,7 @@ class Celestial_Body(abc.ABC):
     # render this object at a specific time
     def render(self, camera, time):
         position = self.position_at(time)
-        detail_level = render.detail_level(15, 250*self.radius/camera.fov, Vector3.distance(position, camera.position))
+        detail_level = render.detail_level(15, 5, Vector3.distance(position, camera.position)/self.radius**2)
 
         render.draw_sphere(camera, self.radius, position, detail_level, self.color)
     

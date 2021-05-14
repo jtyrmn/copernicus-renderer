@@ -7,6 +7,8 @@ from vector3 import *
 import pygame
 from pygame.locals import *
 
+from math import log
+
 # this class is to manage the first person view of the renderer
 # position and rotation are both Vector_3 objects, rotation is in degrees
 
