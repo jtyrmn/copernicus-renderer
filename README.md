@@ -16,7 +16,7 @@ renders and accurately displays planetary positions, trajectories from a planet-
   * [ ] generic skybox
 * Optimization
   * [ ] Memoization of trajectory paths to avoid need to recalculate precise position of every point of trajectory path each frame
-   * [ ]Bezier curves for smoother curves and less memory needed for storing points?
+   * [ ] Bezier curves for smoother curves and less memory needed for storing points?
   * [ ] Structure tree class to store celestial bodies for better organization and rendering performance.
    * [ ] With pyopengl's matrix stack and celestial bodies' body-orbiting-body-orbiting-body recursive nature, a tree structure that recursively groups the bodies can render objects recursively more efficiently than the current method
    * [ ] Replace pygame with a better, more lightweight(?) rendering front-end. Pygame causes issues with my KDE compositor anyways.
