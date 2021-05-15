@@ -9,6 +9,7 @@ renders and accurately displays planetary positions, trajectories from a planet-
  * [ ] Planetary Rotation
  * [ ] Celestial bodies should display velocities, poles, as well as rotation
  * [ ] Text GUI (May need to swap out pygame first, unless GUI is in a separate window (TKINTER))
+ * [ ] Separate `camera.py` into to different modules `camera.py` and `controls.py` for organization
 * Better visuals
   * [ ] Ability to assign cubemap textures to celestial bodies
   * [ ] fix the broken detail culling
@@ -32,3 +33,6 @@ pip install pygame PyOpenGL PyOpenGL_accelerate
 git clone https://github.com/jtyrmn/copernicus-renderer.git
 ```
 You can run the program by running python on `src/main.py`
+
+## Usage
+Currently, to control the camera use W,A,S,D to move around and the up,down,left,right keys to rotate the camera.
