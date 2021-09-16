@@ -1,6 +1,8 @@
+from copy import deepcopy
 import render
 from vector3 import Vector3
 from camera import Camera
+from controls import Controls
 
 import universe_models.tychonic
 import universe_models.kepler
@@ -15,9 +17,13 @@ WIDTH, HEIGHT = 1000, 800
 
 def main():
     # camera object
-    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.01, 0.1)
+    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.02, 0.04)
     # create window
     screen = render.renderer_init(WIDTH, HEIGHT)
+    Controls.controls_init()
+
+    v_direction = Vector3(0,0,-1)
+    v_position = Vector3(0,0,0)
 
     # main loop
     while True:
@@ -26,7 +32,7 @@ def main():
         
         # render everything here
         #render.draw_circle(camera, 1, Vector3(0, 0, 0))
-        time = pygame.time.get_ticks() * 2
+        time = int(pygame.time.get_ticks())
         
         # Tychonic model of universe, see universe_models for more info
         for body in universe_models.kepler.kepler_model:
@@ -34,9 +40,14 @@ def main():
             # Note that render_trajectory is quite expensive to run atm, it has to calculate the 
             # position for every past/previous position when it should be memoized (on my TODO list)
             body.render_trajectory(camera, time-3000, time+3000, 400)
+        
+        if Controls.key_e:
+            v_position = deepcopy(camera.position)
+            v_direction = Vector3(0, 0, -1).rotate(camera.rotation.to_radians()).vector_mul(Vector3(1, -1, 1))
 
-        # swap buffers to show what's rendered
+        render.draw_line(camera, v_position, v_position + v_direction*100)
+
+        # swap buffers
         render.at_end_of_loop()
         camera.at_end_of_loop(time)
-
 main()

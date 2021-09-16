@@ -7,7 +7,10 @@ from vector3 import *
 import pygame
 from pygame.locals import *
 
-from math import log
+from controls import Controls
+
+from math import log, radians
+from copy import copy
 
 # this class is to manage the first person view of the renderer
 # position and rotation are both Vector_3 objects, rotation is in degrees
@@ -15,7 +18,7 @@ from math import log
 # width and height means screen size
 # speed defines movement speed and sensitivity defines rotation speed
 class Camera:
-    def __init__(self, position, rotation, width, height, fov, speed = 1, sensitivity = 1, current_time = 0):
+    def __init__(self, position, rotation, width, height, fov = 45, speed = 1, sensitivity = 1, current_time = 0):
         self.position = position
         self.rotation = rotation
         self.width = width
@@ -27,25 +30,6 @@ class Camera:
         # keep track of the time. current_time is the current time in miliseconds.
         self.current_time = current_time
         self.delta_time = 1
-
-        # variables to keep track of movement/etc.
-        # pygame.key.get_pressed() and event.key == w,a,s,d,... had irregular
-        # movement when you held them while using other keys so I'm using this method
-        # I'll try to figure out a cleaner method later
-        self.key_w = False
-        self.key_a = False
-        self.key_s = False
-        self.key_d = False
-        self.key_space = False
-        self.key_shift = False
-
-        self.key_left = False
-        self.key_right = False
-        self.key_up = False
-        self.key_down = False
-
-        self.key_i = False
-        self.key_o = False
     
     # this function translates the camera's position *relative to it's rotation* by the position parameter
     # parameter is a Vector_3 that defines the direction to move to 
@@ -78,92 +62,38 @@ class Camera:
     # handle input. *Must* be called once per main loop
     # deals with pygame events
     def handle_input(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+        Controls.handle_input()
+        #print(controls.key_a)
 
-            # key pressed
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    self.key_w = True
-                if event.key == pygame.K_a:
-                    self.key_a = True
-                if event.key == pygame.K_s:
-                    self.key_s = True
-                if event.key == pygame.K_d:
-                    self.key_d = True
-                if event.key == pygame.K_SPACE:
-                    self.key_space = True
-                if event.key == pygame.K_LSHIFT:
-                    self.key_shift = True
-                if event.key == pygame.K_LEFT:
-                    self.key_left = True
-                if event.key == pygame.K_RIGHT:
-                    self.key_right = True
-                if event.key == pygame.K_UP:
-                    self.key_up = True
-                if event.key == pygame.K_DOWN:
-                    self.key_down = True
-                if event.key == pygame.K_i:
-                    self.key_i = True
-                if event.key == pygame.K_o:
-                    self.key_o = True
-            
-            #TODO maybe find a better way to do this
-
-            # key released
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_w:
-                    self.key_w = False
-                if event.key == pygame.K_a:
-                    self.key_a = False
-                if event.key == pygame.K_s:
-                    self.key_s = False
-                if event.key == pygame.K_d:
-                    self.key_d = False
-                if event.key == pygame.K_SPACE:
-                    self.key_space = False
-                if event.key == pygame.K_LSHIFT:
-                    self.key_shift = False
-                if event.key == pygame.K_LEFT:
-                    self.key_left = False
-                if event.key == pygame.K_RIGHT:
-                    self.key_right = False
-                if event.key == pygame.K_UP:
-                    self.key_up = False
-                if event.key == pygame.K_DOWN:
-                    self.key_down = False
-                if event.key == pygame.K_i:
-                    self.key_i = False
-                if event.key == pygame.K_o:
-                    self.key_o = False
-            
-        # above 2 blocks of code dealt with variables, now to perform actions with these variables
-        if self.key_a:
+        if Controls.key_a:
             self.move(Vector3(-1,0,0))
-        if self.key_d:
+        if Controls.key_d:
             self.move(Vector3(1,0,0))
-        if self.key_w:
+        if Controls.key_w:
             self.move(Vector3(0,0,-1))
-        if self.key_s:
+        if Controls.key_s:
             self.move(Vector3(0,0,1))
-        if self.key_space:
+
+        if Controls.key_space:
             self.move(Vector3(0,-1,0))
-        if self.key_shift:
+        if Controls.key_shift:
             self.move(Vector3(0,1,0))
-        if self.key_left:
-            self.rotate(Vector3(0,-1,0))
-        if self.key_right:
-            self.rotate(Vector3(0,1,0))
-        if self.key_up:
-            self.rotate(Vector3(-1,0,0))
-        if self.key_down:
-            self.rotate(Vector3(1,0,0))
-        if self.key_i:
+
+        # if Controls.key_left:
+        #     self.rotate(Vector3(0,-1,0))
+        # if Controls.key_right:
+        #     self.rotate(Vector3(0,1,0))
+        # if Controls.key_up:
+        #     self.rotate(Vector3(-1,0,0))
+        # if Controls.key_down:
+        #     self.rotate(Vector3(1,0,0))
+
+        # Mouse movement
+        self.rotate(Vector3(Controls.mouse_x, Controls.mouse_y, 0))
+
+        if Controls.key_i:
             self.fov += 0.1
-        if self.key_o:
+        if Controls.key_o:
             self.fov -= 0.1
-        
-        # ensure pov isn't too small or big
+        # ensure stays in the range (1, 100)
         self.fov = max(min(self.fov, 100), 1)

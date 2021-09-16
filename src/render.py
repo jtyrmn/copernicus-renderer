@@ -12,7 +12,7 @@ from vector3 import *
 import sys
 
 sphere = gluNewQuadric()
-#gluQuadricDrawStyle(sphere, GLU_LINE) #for wire-frame rendering
+gluQuadricDrawStyle(sphere, GLU_LINE) #for wire-frame rendering
 
 pygame.font.init()
 font = pygame.font.Font(pygame.font.get_default_font(), 36)

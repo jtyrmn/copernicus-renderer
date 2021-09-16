@@ -25,6 +25,10 @@ class Vector3:
         return Vector3(self.x * factor, self.y * factor, self.z * factor)
     def __mod__(self, divisor):
         return Vector3(self.x % divisor, self.y % divisor, self.z % divisor)
+    
+    # Multiply by another vector. Useful for masking or inverting specific components
+    def vector_mul(self, vector):
+        return Vector3(self.x * vector.x, self.y * vector.y, self.z * vector.z)
 
     #returns magnitude of vector
     def length(self):
