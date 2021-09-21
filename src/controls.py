@@ -40,12 +40,13 @@ class Controls:
     @staticmethod
     def handle_input():
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            # exit condition
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 sys.exit()
 
             # mouse movement
-            if event.type == MOUSEMOTION:
+            elif event.type == MOUSEMOTION:
                 y, x = pygame.mouse.get_pos()
                 #print(f"x: {x} y: {y}")
                 Controls.mouse_x, Controls.mouse_y = x - 100, -(y - 100)

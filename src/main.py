@@ -3,6 +3,7 @@ import render
 from vector3 import Vector3
 from camera import Camera
 from controls import Controls
+from logic import Logic
 
 import universe_models.tychonic
 import universe_models.kepler
@@ -17,7 +18,7 @@ WIDTH, HEIGHT = 1000, 800
 
 def main():
     # camera object
-    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.02, 0.04)
+    camera = Camera(Vector3(0,0,0), Vector3(0,0,0), WIDTH, HEIGHT, 45, 0.02, 0.02)
     # create window
     screen = render.renderer_init(WIDTH, HEIGHT)
     Controls.controls_init()
@@ -42,8 +43,9 @@ def main():
             body.render_trajectory(camera, time-3000, time+3000, 400)
         
         if Controls.key_e:
-            v_position = deepcopy(camera.position)
-            v_direction = Vector3(0, 0, -1).rotate(camera.rotation.to_radians()).vector_mul(Vector3(1, -1, 1))
+            body = Logic.select_body(camera, universe_models.kepler.kepler_model, time)
+            if body != None:
+                print(f"{body} is selected")
 
         render.draw_line(camera, v_position, v_position + v_direction*100)
 

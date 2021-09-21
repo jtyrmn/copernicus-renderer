@@ -8,10 +8,11 @@ from copy import copy
 # trajectory is a Trajectory subclass' object
 # color is a 3-element tuple, not Vector3
 class Celestial_Body(abc.ABC):
-    def __init__(self, trajectory, radius, color = (255, 108, 150)):
+    def __init__(self, trajectory, radius, color = (255, 108, 150), name = "unnamed rock"):
         self.trajectory = trajectory
         self.radius = radius
         self.color = color
+        self.name = name
     
     def position_at(self, time):
         return self.trajectory.calculate_position_at_time(time)
@@ -26,3 +27,6 @@ class Celestial_Body(abc.ABC):
     # render the trajectory of this body during time interval [time_begin, time_final] at step intervals of time_step
     def render_trajectory(self, camera, time_begin, time_final, time_step):
         self.trajectory.render(camera, time_begin, time_final, time_step)
+    
+    def __str__(self) -> str:
+        return self.name

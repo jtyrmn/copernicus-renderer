@@ -11,7 +11,8 @@ sun = Celestial_Body(
         Vector3(0,0,-10)
     ),
     7,
-    (0.921, 0.592, 0)
+    (0.921, 0.592, 0),
+    name="Sun"
 )
 mercury = Celestial_Body(
     Ellipse_Mock(
@@ -21,7 +22,8 @@ mercury = Celestial_Body(
         50000
     ),
     0.7,
-    (0.772, 0.588, 0.403)
+    (0.772, 0.588, 0.403),
+    name="Mercury"
 )
 venus = Celestial_Body(
     Ellipse_Mock(
@@ -31,7 +33,8 @@ venus = Celestial_Body(
         60000
     ),
     0.8,
-    (0.772, 0.588, 0.403)
+    (0.772, 0.588, 0.403),
+    name="Mercury"
 )
 earth = Celestial_Body(
     Ellipse_Mock(
@@ -41,7 +44,8 @@ earth = Celestial_Body(
         70000
     ),
     1,
-    (0.145, 0.243, 0.937)
+    (0.145, 0.243, 0.937),
+    name="Earth"
 )
 moon = Celestial_Body(
     Ellipse_Mock(
@@ -51,7 +55,8 @@ moon = Celestial_Body(
         4000
     ),
     0.3,
-    (0.698, 0.749, 0.780)
+    (0.698, 0.749, 0.780),
+    name="Theia"
 )
 mars = Celestial_Body(
     Ellipse_Mock(
@@ -61,7 +66,8 @@ mars = Celestial_Body(
         80000
     ),
     1,
-    (0.850, 0.286, 0.211)
+    (0.850, 0.286, 0.211),
+    name="Mars"
 )
 jupiter = Celestial_Body(
     Ellipse_Mock(
@@ -71,7 +77,8 @@ jupiter = Celestial_Body(
         90000
     ),
     3,
-    (0.780, 0.447, 0.4)
+    (0.780, 0.447, 0.4),
+    name="Jupiter"
 )
 saturn = Celestial_Body(
     Ellipse_Mock(
@@ -81,7 +88,8 @@ saturn = Celestial_Body(
         100000
     ),
     2,
-    (0.780, 0.690, 0.4)
+    (0.780, 0.690, 0.4),
+    name="Saturn"
 )
 uranus = Celestial_Body(
     Ellipse_Mock(
@@ -91,7 +99,8 @@ uranus = Celestial_Body(
         110000
     ),
     0.9,
-    (0.133, 0.862, 0.866)
+    (0.133, 0.862, 0.866),
+    name="Uranus"
 )
 neptune = Celestial_Body(
     Ellipse_Mock(
@@ -101,7 +110,8 @@ neptune = Celestial_Body(
         110000
     ),
     0.8,
-    (0.047, 0.443, 0.713)
+    (0.047, 0.443, 0.713),
+    name="Neptune"
 )
 pluto = Celestial_Body(
     Ellipse_Mock(
@@ -112,6 +122,7 @@ pluto = Celestial_Body(
         tilt=3.14/4
     ),
     0.5,
-    (0.047, 0.443, 0.713)
+    (0.047, 0.443, 0.713),
+    name="Pluto"
 )
 kepler_model = [sun, mercury, mars, earth, moon, venus, jupiter, saturn, uranus, neptune]
