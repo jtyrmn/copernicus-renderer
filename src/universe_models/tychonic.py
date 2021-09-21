@@ -12,7 +12,8 @@ earth = Celestial_Body(
         Vector3(0,0,0)
     ),
     1,
-    (0, 83/255, 255/255)
+    (0, 83/255, 255/255),
+    name="Earth"
 )
 moon = Celestial_Body(
     Circular(
@@ -22,7 +23,8 @@ moon = Celestial_Body(
         0
     ),
     0.3,
-    (200/255, 204/255, 209/255)
+    (200/255, 204/255, 209/255),
+    name="Moon"
 )
 sun = Celestial_Body(
     Circular(
@@ -32,7 +34,8 @@ sun = Celestial_Body(
         0
     ),
     3,
-    (253/255, 209/255, 0)
+    (253/255, 209/255, 0),
+    name="Sun"
 )
 mercury = Celestial_Body(
     Circular(
@@ -42,7 +45,8 @@ mercury = Celestial_Body(
         0
     ),
     1,
-    (255/255, 157/255, 128/255)
+    (255/255, 157/255, 128/255),
+    name="Mercury"
 )
 venus = Celestial_Body(
     Circular(
@@ -52,7 +56,8 @@ venus = Celestial_Body(
         0
     ),
     1,
-    (255/255, 157/255, 128/255)
+    (255/255, 157/255, 128/255),
+    name="Venus"
 )
 mars = Celestial_Body(
     Circular(
@@ -62,7 +67,8 @@ mars = Celestial_Body(
         0
     ),
     1,
-    (255/255, 104/255, 61/255)
+    (255/255, 104/255, 61/255),
+    name="Mars"
 )
 jupiter = Celestial_Body(
     Circular(
@@ -72,7 +78,8 @@ jupiter = Celestial_Body(
         0
     ),
     3,
-    (218/255, 163/255, 102/255)
+    (218/255, 163/255, 102/255),
+    name="Jupiter"
 )
 saturn = Celestial_Body(
     Circular(
@@ -82,7 +89,8 @@ saturn = Celestial_Body(
         0
     ),
     2,
-    (222/255, 185/255, 139/255)
+    (222/255, 185/255, 139/255),
+    name="Saturn"
 )
 
 tychonic_model = [earth, moon, sun, mercury, venus, mars, jupiter, saturn]

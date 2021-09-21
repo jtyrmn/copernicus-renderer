@@ -34,7 +34,7 @@ venus = Celestial_Body(
     ),
     0.8,
     (0.772, 0.588, 0.403),
-    name="Mercury"
+    name="Venus"
 )
 earth = Celestial_Body(
     Ellipse_Mock(
