@@ -46,7 +46,7 @@ class Logic:
             print(f"{body} with distance {minimum_distance}")
 
             # if minimum_distance is the smallest so far, this is the closest body
-            if minimum_distance < selected_distance:
+            if minimum_distance < selected_distance  and t >= 0:
                 selected = body
                 selected_distance = minimum_distance
         

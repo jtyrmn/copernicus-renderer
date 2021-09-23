@@ -1,4 +1,5 @@
-from copy import deepcopy
+from copy import copy, deepcopy
+from math import cos, sin
 import render
 from vector3 import Vector3
 from camera import Camera
@@ -42,6 +43,15 @@ def main():
             # position for every past/previous position when it should be memoized (on my TODO list)
             body.render_trajectory(camera, time-3000, time+3000, 400)
         
+        r = camera.rotation.to_radians()
+        m_x = cos(r.x) * cos(r.y)
+        m_y = -sin(r.x)
+        m_z = sin(r.x) * cos(r.y)
+        v_position = copy(camera.position);
+        v_direction = Vector3(m_x, m_y, m_z)
+        render.draw_line(camera, Vector3(0,0,0), v_direction * 10)
+        render.draw_sphere(camera, 1, v_direction * 10, 15, (1,1,1))
+
         if Controls.key_e:
             body = Logic.select_body(camera, universe_models.kepler.kepler_model, time)
             if body != None:

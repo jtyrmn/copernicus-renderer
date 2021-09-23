@@ -89,7 +89,7 @@ class Camera:
         #     self.rotate(Vector3(1,0,0))
 
         # Mouse movement
-        self.rotate(Vector3(Controls.mouse_x, Controls.mouse_y, 0))
+        self.rotate(Vector3(Controls.mouse_x, -Controls.mouse_y, 0))
 
         if Controls.key_i:
             self.fov += 0.1
