@@ -43,14 +43,11 @@ def main():
             # position for every past/previous position when it should be memoized (on my TODO list)
             body.render_trajectory(camera, time-3000, time+3000, 400)
         
-        r = camera.rotation.to_radians()
-        m_x = cos(r.x) * cos(r.y)
-        m_y = -sin(r.x)
-        m_z = sin(r.x) * cos(r.y)
-        v_position = copy(camera.position);
-        v_direction = Vector3(m_x, m_y, m_z)
-        render.draw_line(camera, Vector3(0,0,0), v_direction * 10)
-        render.draw_sphere(camera, 1, v_direction * 10, 15, (1,1,1))
+        camera_raycast = Vector3(0,0,-1).rotate(camera.rotation.to_radians()).vector_mul(Vector3(1, -1, 1))
+        v_position = copy(camera.position)
+        v_direction = camera_raycast
+        #render.draw_line(camera, v_position, v_position + v_direction * 10, color = (1,0,0))
+        render.draw_sphere(camera, 0.2, v_position + v_direction * 10, 15, (1,1,1))
 
         if Controls.key_e:
             body = Logic.select_body(camera, universe_models.kepler.kepler_model, time)
@@ -58,6 +55,7 @@ def main():
                 print(f"{body} is selected")
 
         render.draw_line(camera, v_position, v_position + v_direction*100)
+        
 
         # swap buffers
         render.at_end_of_loop()

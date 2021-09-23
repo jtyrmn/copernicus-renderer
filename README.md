@@ -5,7 +5,7 @@ renders and accurately displays planetary positions, trajectories from a planet-
 
 ## Roadmap
 * Main things
- * [ ] Ability to select a celestial body and fix the camera's position and relative rotation to it, giving a perspective of the solar system from a specific coordinate of that body.
+ * [x] Ability to select a celestial body and fix the camera's position and relative rotation to it, giving a perspective of the solar system from a specific coordinate of that body.
  * [ ] Planetary Rotation
  * [ ] Celestial bodies should display velocities, poles, as well as rotation
  * [ ] Text GUI (May need to swap out pygame first, unless GUI is in a separate window (TKINTER))

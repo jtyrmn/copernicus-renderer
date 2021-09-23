@@ -3,8 +3,8 @@
 '''
 
 from math import cos, inf, sin, sqrt
+from vector3 import Vector3
 
-from pygame import Vector3
 from celestial_bodies.celestial_body import Celestial_Body
 
 class Logic:
@@ -21,10 +21,10 @@ class Logic:
         if not len(bodies):
             return None
         
-        rotation = camera.rotation.to_radians()
-        m_x = cos(rotation.x) * cos(rotation.y)
-        m_y = -sin(rotation.x)
-        m_z = sin(rotation.x) * cos(rotation.y)
+        camera_raycast = Vector3(0,0,-1).rotate(camera.rotation.to_radians()).vector_mul(Vector3(1, -1, 1))
+        m_x = camera_raycast.x
+        m_y = camera_raycast.y
+        m_z = camera_raycast.z
 
         selected = None
         selected_distance = inf
@@ -46,9 +46,10 @@ class Logic:
             print(f"{body} with distance {minimum_distance}")
 
             # if minimum_distance is the smallest so far, this is the closest body
-            if minimum_distance < selected_distance  and t >= 0:
+            # and ensure the raycast passes through the spherical body
+            if minimum_distance < selected_distance and minimum_distance <= body.radius and t >= 0:
                 selected = body
                 selected_distance = minimum_distance
         
         # Finally, return body unless it wasn't selected
-        return (selected if selected_distance >= selected.radius else None)
+        return (selected if selected != None else None)
