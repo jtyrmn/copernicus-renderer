@@ -29,6 +29,7 @@ def renderer_init(width, height):
 # simple function to swap buffer. *must* call at end of every main loop
 # Just so I can keep all the pygame stuff in this file instead of __main__.py
 def at_end_of_loop():
+
     pygame.display.flip()
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -96,6 +97,15 @@ def draw_line(camera, origin, destination, color = (1,1,1), line_width = 1):
     glEnd()
 
     glPopMatrix()
+
+#Draws a 3-axis xyz widget at the center of the screen, to give the user sense of orientation
+def draw_widget(camera):
+    widget_position = camera.position + Vector3(0, 0, -1).rotate(camera.rotation.to_radians()).vector_mul(Vector3(1, -1, 1))
+
+    # drawing the x, y, z lines respectively
+    draw_line(camera, widget_position, widget_position + Vector3(1, 0, 0) * 0.02, color=(1, 0, 0), line_width=2)
+    draw_line(camera, widget_position, widget_position + Vector3(0, 1, 0) * 0.02, color=(0, 1, 0), line_width=2)
+    draw_line(camera, widget_position, widget_position + Vector3(0, 0, 1) * 0.02, color=(0, 0, 1), line_width=2)
 
 # this function is for determining the number of stacks, slices of a sphere, which should decrease as the 
 # distance from the camera increases. Parameter distance should implement Vector3 .length() or .distance() function
