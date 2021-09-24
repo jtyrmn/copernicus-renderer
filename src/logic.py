@@ -43,7 +43,7 @@ class Logic:
 
             minimum_distance = sqrt((m_x*t + b_x)**2 + (m_y*t + b_y)**2 + (m_z*t + b_z)**2)
 
-            print(f"{body} with distance {minimum_distance}")
+            #print(f"{body} with distance {minimum_distance}")
 
             # if minimum_distance is the smallest so far, this is the closest body
             # and ensure the raycast passes through the spherical body

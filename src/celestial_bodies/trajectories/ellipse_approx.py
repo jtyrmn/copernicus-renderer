@@ -1,6 +1,7 @@
 from math import sin, cos, pi
 
 from celestial_bodies.trajectories.trajectory import Trajectory
+from celestial_bodies.trajectories.rotation import Rotation
 from vector3 import *
 
 # this class will demonstrate an elliptical orbit but won't be scientifically accurate or reliable for predictions
@@ -10,11 +11,12 @@ class Ellipse_Mock(Trajectory):
     # don't worry too much about each parameter, they aren't precise anyways
     # eccentricity is a value within [0,1). The closer to one, the more oval-like
     # tilt is rotation around the x-axis, in radians
-    def __init__(self, orbited, mean_radius, eccentricity, period, phase = 0, tilt = 0):
+    def __init__(self, orbited, mean_radius, eccentricity, period, rotation, phase = 0, tilt = 0):
         self.orbited = orbited
         self.mean_radius = mean_radius
         self.eccentricity = eccentricity
         self.period = period
+        self.rotation = rotation
         self.phase = phase
         self.tilt = tilt
     
@@ -27,3 +29,6 @@ class Ellipse_Mock(Trajectory):
         position = position.rotate(Vector3(self.tilt, 0, 0))
 
         return position + self.orbited.position_at(time)
+    
+    def calculate_rotation_at_time(self, time):
+        return self.rotation.rotation_at_time(time)

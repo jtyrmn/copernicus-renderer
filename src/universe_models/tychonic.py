@@ -1,3 +1,4 @@
+from celestial_bodies.trajectories.rotation import Rotation
 from celestial_bodies.celestial_body import Celestial_Body
 from celestial_bodies.trajectories.circular import Circular
 from celestial_bodies.trajectories.stationary import Stationary
@@ -20,7 +21,11 @@ moon = Celestial_Body(
         earth,
         3,
         3000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     0.3,
     (200/255, 204/255, 209/255),
@@ -31,7 +36,11 @@ sun = Celestial_Body(
         earth,
         20,
         24000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     3,
     (253/255, 209/255, 0),
@@ -42,7 +51,11 @@ mercury = Celestial_Body(
         sun,
         7,
         6000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     1,
     (255/255, 157/255, 128/255),
@@ -53,7 +66,11 @@ venus = Celestial_Body(
         sun,
         7,
         7300,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     1,
     (255/255, 157/255, 128/255),
@@ -64,7 +81,11 @@ mars = Celestial_Body(
         sun,
         30,
         9000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     1,
     (255/255, 104/255, 61/255),
@@ -75,7 +96,11 @@ jupiter = Celestial_Body(
         sun,
         36,
         11000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     3,
     (218/255, 163/255, 102/255),
@@ -86,7 +111,11 @@ saturn = Celestial_Body(
         sun,
         42,
         12000,
-        0
+        0,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0.1, 0, 0)
+        )
     ),
     2,
     (222/255, 185/255, 139/255),

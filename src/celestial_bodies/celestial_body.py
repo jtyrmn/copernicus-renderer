@@ -22,7 +22,7 @@ class Celestial_Body(abc.ABC):
         position = self.position_at(time)
         detail_level = render.detail_level(15, 5, Vector3.distance(position, camera.position)/self.radius**2)
 
-        render.draw_sphere(camera, self.radius, position, detail_level, self.color)
+        render.draw_sphere(camera, self.radius, position, detail_level, self.color, self.trajectory.calculate_rotation_at_time(time))
     
     # render the trajectory of this body during time interval [time_begin, time_final] at step intervals of time_step
     def render_trajectory(self, camera, time_begin, time_final, time_step):

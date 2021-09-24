@@ -6,7 +6,7 @@ renders and accurately displays planetary positions, trajectories from a planet-
 ## Roadmap
 * Main things
  * [x] Ability to select a celestial body and fix the camera's position and relative rotation to it, giving a perspective of the solar system from a specific coordinate of that body.
- * [ ] Planetary Rotation
+ * [x] Planetary Rotation
  * [ ] Celestial bodies should display velocities, poles, as well as rotation
  * [ ] Text GUI (May need to swap out pygame first, unless GUI is in a separate window (TKINTER))
  * [ ] Separate `camera.py` into to different modules `camera.py` and `controls.py` for organization
@@ -35,4 +35,4 @@ git clone https://github.com/jtyrmn/copernicus-renderer.git
 You can run the program by running python on `src/main.py`
 
 ## Usage
-Currently, to control the camera use W,A,S,D to move around and the up,down,left,right keys to rotate the camera.
+Currently, to control the camera use W,A,S,D to move around and mouse to rotate the camera. Press escape to exit the window.

@@ -50,6 +50,9 @@ def main():
             body = Logic.select_body(camera, universe_models.kepler.kepler_model, time)
             if body != None:
                 selected_body = body
+                print(f"selected body with name {body}")
+            else:
+                print("no selected body")
 
         # X Y Z widget at center of screen
         render.draw_widget(camera)

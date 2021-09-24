@@ -12,6 +12,10 @@ class Trajectory(ABC):
     @abstractmethod
     def calculate_position_at_time(self, time):
         pass
+
+    @abstractmethod
+    def calculate_rotation_at_time(self, time):
+        pass
     
     # draw this trajectory's path during time interval [time_begin, time_final] at step intervals 
     # of time_step

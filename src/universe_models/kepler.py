@@ -2,6 +2,8 @@ from celestial_bodies.celestial_body import Celestial_Body
 from celestial_bodies.trajectories.stationary import Stationary
 from celestial_bodies.trajectories.ellipse_approx import Ellipse_Mock
 
+from celestial_bodies.trajectories.rotation import Rotation
+
 from vector3 import Vector3
 # the kepler model is practically the modern model of the universe, including
 # elliptical orbits. Note that the orbit patterns, sizes, etc are not accurate to reality.
@@ -19,7 +21,11 @@ mercury = Celestial_Body(
         sun,
         20,
         0.3,
-        50000
+        50000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     0.7,
     (0.772, 0.588, 0.403),
@@ -30,7 +36,11 @@ venus = Celestial_Body(
         sun,
         30,
         0.3,
-        60000
+        60000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     0.8,
     (0.772, 0.588, 0.403),
@@ -41,7 +51,11 @@ earth = Celestial_Body(
         sun,
         40,
         0.3,
-        70000
+        70000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     1,
     (0.145, 0.243, 0.937),
@@ -52,7 +66,11 @@ moon = Celestial_Body(
         earth,
         2,
         0.3,
-        4000
+        4000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     0.3,
     (0.698, 0.749, 0.780),
@@ -63,7 +81,11 @@ mars = Celestial_Body(
         sun,
         50,
         0.3,
-        80000
+        80000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     1,
     (0.850, 0.286, 0.211),
@@ -74,7 +96,11 @@ jupiter = Celestial_Body(
         sun,
         60,
         0.3,
-        90000
+        90000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     3,
     (0.780, 0.447, 0.4),
@@ -85,7 +111,11 @@ saturn = Celestial_Body(
         sun,
         70,
         0.3,
-        100000
+        100000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     2,
     (0.780, 0.690, 0.4),
@@ -96,7 +126,11 @@ uranus = Celestial_Body(
         sun,
         80,
         0.3,
-        110000
+        110000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     0.9,
     (0.133, 0.862, 0.866),
@@ -107,7 +141,11 @@ neptune = Celestial_Body(
         sun,
         80,
         0.3,
-        110000
+        110000,
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        )
     ),
     0.8,
     (0.047, 0.443, 0.713),
@@ -119,10 +157,14 @@ pluto = Celestial_Body(
         90,
         0.3,
         110000,
-        tilt=3.14/4
+        Rotation(
+            Vector3(0.1, 0.1, 0.1),
+            Vector3(0, 0.1, 0)
+        ),
+        tilt=3.14/80
     ),
     0.5,
     (0.047, 0.443, 0.713),
     name="Pluto"
 )
-kepler_model = [sun, mercury, mars, earth, moon, venus, jupiter, saturn, uranus, neptune]
+kepler_model = [sun, mercury, mars, earth, moon, venus, jupiter, saturn, uranus, neptune, pluto]

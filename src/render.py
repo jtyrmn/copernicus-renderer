@@ -35,7 +35,7 @@ def at_end_of_loop():
 
 
 # see render.detail_level() for info on parameter detail
-def draw_sphere(camera, radius, position, detail, color):
+def draw_sphere(camera, radius, position, detail, color, rotation = Vector3(0,0,0)):
     # note that all of the matrix transformations are performed in reverse order due to PyOpenGl's matrix stack
     glPushMatrix()
     # color
@@ -47,14 +47,20 @@ def draw_sphere(camera, radius, position, detail, color):
     gluPerspective(camera.fov, camera.width/camera.height, 0.1, sys.float_info.max)
     
     # rotate object around camera to simulate camera's rotation
-    glRotatef(camera.rotation.x, 1, 0, 0)
-    glRotatef(camera.rotation.y, 0, 1, 0)
-    glRotatef(camera.rotation.z, 0, 0, 1)
+    glRotatef(camera.rotation.x, 1,0,0)
+    glRotatef(camera.rotation.y, 0,1,0)
+    glRotatef(camera.rotation.z, 0,0,1)
 
     # camera's position
     glTranslatef(-camera.position.x, -camera.position.y, -camera.position.z)
     # object's position
     glTranslatef(position.x, position.y, position.z)
+
+    # apply rotation to sphere
+    glRotatef(rotation.x, 1,0,0)
+    glRotatef(rotation.y, 0,1,0)
+    glRotatef(rotation.z, 0,0,1)
+
 
     # rotate the sphere so that one of it's polar ends (not related to planets, just the 2 opposite ends of a UV sphere) 
     # faces the camera. This makes the sphere appear rounder and more consistent from a moving camera
