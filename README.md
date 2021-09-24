@@ -30,9 +30,10 @@ pip install pygame PyOpenGL PyOpenGL_accelerate
 ```
 ### Download Repository
 ```
-git clone https://github.com/jtyrmn/copernicus-renderer.git
+git clone https://github.com/jtyrmn/milankovich-renderer
 ```
 You can run the program by running python on `src/main.py`
 
 ## Usage
 Currently, to control the camera use W,A,S,D to move around and mouse to rotate the camera. Press escape to exit the window.
+Press e to select a celestial body. Console will display selected body.
