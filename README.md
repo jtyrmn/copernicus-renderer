@@ -1,4 +1,4 @@
-# copernicus-renderer
+# milankovich-renderer
 Currently work in progress, but the final result would be a program that
 renders and accurately displays planetary positions, trajectories from a planet-bound perspective.
 ![copernicus_renderer](https://user-images.githubusercontent.com/83618806/118250531-700f3300-b45b-11eb-9d84-4f11d6ac5797.png)
